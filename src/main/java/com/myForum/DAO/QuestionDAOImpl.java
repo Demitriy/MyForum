@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Repository
 public class QuestionDAOImpl implements QuestionDAO {
-    
+
     @Autowired
     @Qualifier(value = "dataSource")
     private DataSource dataSource;
@@ -64,6 +64,7 @@ public class QuestionDAOImpl implements QuestionDAO {
                     question.setContent(resultSet.getString("content"));
                     result.add(question);
                 }
+                return result;
             } catch (SQLException e) {
                 System.out.println("SQLException : QuestionDAOImpl : 67");
                 e.printStackTrace();
@@ -75,7 +76,6 @@ public class QuestionDAOImpl implements QuestionDAO {
                     e.printStackTrace();
                 }
             }
-            return result;
         } else {
             System.out.println("dataSource is null : QuestionDAOImpl : 49");
         }
