@@ -21,6 +21,14 @@ public class QuestionDAOImpl implements QuestionDAO {
     @Qualifier(value = "dataSource")
     private DataSource dataSource;
 
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public void addQuestion(Question question) {
         if (dataSource != null) {
             Connection connection = null;
@@ -33,18 +41,18 @@ public class QuestionDAOImpl implements QuestionDAO {
                 preparedStatement.setString(3, question.getContent());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 37");
+                System.out.println("SQLException : QuestionDAOImpl : 44");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 43");
+                    System.out.println("SQLException : QuestionDAOImpl : 50");
                     e.printStackTrace();
                 }
             }
         } else {
-            System.out.println("dataSource is null : QuestionDAOImpl : 48");
+            System.out.println("dataSource is null : QuestionDAOImpl : 55");
         }
     }
 
@@ -66,18 +74,18 @@ public class QuestionDAOImpl implements QuestionDAO {
                 }
                 return result;
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 67");
+                System.out.println("SQLException : QuestionDAOImpl : 77");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 73");
+                    System.out.println("SQLException : QuestionDAOImpl : 83");
                     e.printStackTrace();
                 }
             }
         } else {
-            System.out.println("dataSource is null : QuestionDAOImpl : 80");
+            System.out.println("dataSource is null : QuestionDAOImpl : 88");
         }
         return null;
     }
