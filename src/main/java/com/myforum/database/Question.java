@@ -1,4 +1,4 @@
-package com.myForum.DatabaseEntity;
+package com.myforum.database;
 
 /**
  * Created by dsvetyshov on 06.03.2017.

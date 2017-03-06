@@ -1,6 +1,6 @@
-package com.myForum.DAO;
+package com.myforum.dao;
 
-import com.myForum.DatabaseEntity.Question;
+import com.myforum.database.Question;
 
 import java.util.List;
 

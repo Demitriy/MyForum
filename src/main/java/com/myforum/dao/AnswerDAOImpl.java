@@ -1,10 +1,10 @@
-package com.myForum.DAO;
+package com.myforum.dao;
 
-import com.myForum.DatabaseEntity.Question;
+import com.myforum.database.Answer;
+import com.myforum.database.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by dsvetyshov on 06.03.2017.
+ * Created by Dima on 06.03.2017.
  */
 @Repository
-public class QuestionDAOImpl implements QuestionDAO {
+public class AnswerDAOImpl implements AnswerDAO {
 
     @Autowired
     @Qualifier(value = "dataSource")
@@ -29,48 +29,48 @@ public class QuestionDAOImpl implements QuestionDAO {
         this.dataSource = dataSource;
     }
 
-    public void addQuestion(Question question) {
+    public void addAnswer(Answer answer) {
         if (dataSource != null) {
             Connection connection = null;
             try {
                 connection = dataSource.getConnection();
-                String sql = "INSERT INTO Questions (id, title, content) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO Answers (id, id_question, content) VALUES (?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, question.getId());
-                preparedStatement.setString(2, question.getTitle());
-                preparedStatement.setString(3, question.getContent());
+                preparedStatement.setInt(1, answer.getId());
+                preparedStatement.setInt(2, answer.getQuestion().getId());
+                preparedStatement.setString(3, answer.getComment());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 44");
+                System.out.println("SQLException : AnswerDAOImpl : 44");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 50");
+                    System.out.println("SQLException : AnswerDAOImpl : 50");
                     e.printStackTrace();
                 }
             }
         } else {
-            System.out.println("dataSource is null : QuestionDAOImpl : 55");
+            System.out.println("dataSource is null : AnswerDAOImpl : 55");
         }
     }
 
-    public List<Question> getAllQuestions() {
+    public List<Answer> getAnswers(Question question) {
         if (dataSource != null) {
             Connection connection = null;
-            List<Question> result = new ArrayList<Question>();
+            List<Answer> result = new ArrayList<Answer>();
             try {
                 connection = dataSource.getConnection();
-                String sql = "SELECT * FROM Questions";
+                String sql = "SELECT * FROM Questions AS qst JOIN Answers AS ans ON qst.id = ans.id_question";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql);
                 while (resultSet.next()) {
-                    Question question = new Question();
-                    question.setId(resultSet.getInt("id"));
-                    question.setTitle(resultSet.getString("title"));
-                    question.setContent(resultSet.getString("content"));
-                    result.add(question);
+                    Answer answer = new Answer();
+                    answer.setId(resultSet.getInt("ans.id"));
+                    answer.setComment(resultSet.getString("ans.comment"));
+                    answer.setQuestion(question);
+                    result.add(answer);
                 }
                 return result;
             } catch (SQLException e) {
