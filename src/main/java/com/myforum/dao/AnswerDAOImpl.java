@@ -74,18 +74,18 @@ public class AnswerDAOImpl implements AnswerDAO {
                 }
                 return result;
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 77");
+                System.out.println("SQLException : AnswerDAOImpl : 77");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 83");
+                    System.out.println("SQLException : AnswerDAOImpl : 83");
                     e.printStackTrace();
                 }
             }
         } else {
-            System.out.println("dataSource is null : QuestionDAOImpl : 88");
+            System.out.println("dataSource is null : AnswerDAOImpl : 88");
         }
         return null;
     }
