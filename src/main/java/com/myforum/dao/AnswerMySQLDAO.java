@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Dima on 06.03.2017.
  */
 @Repository
-public class AnswerDAOImpl implements AnswerDAO {
+public class AnswerMySQLDAO implements AnswerDAO {
 
     @Autowired
     @Qualifier(value = "dataSource")
@@ -36,11 +36,10 @@ public class AnswerDAOImpl implements AnswerDAO {
             Connection connection = null;
             try {
                 connection = dataSource.getConnection();
-                String sql = "INSERT INTO Answers (id, id_question, content) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO Answers (id_question, content) VALUE (?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, answer.getId());
-                preparedStatement.setInt(2, answer.getQuestion().getId());
-                preparedStatement.setString(3, answer.getComment());
+                preparedStatement.setInt(1, answer.getQuestion().getId());
+                preparedStatement.setString(2, answer.getComment());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 System.out.println("SQLException : AnswerDAOImpl : 44");
@@ -58,15 +57,17 @@ public class AnswerDAOImpl implements AnswerDAO {
         }
     }
 
-    public List<Answer> getAnswers(Question question) {
+    public List<Answer> getAnswersByQuestion(Question question) {
         if (dataSource != null) {
             Connection connection = null;
             List<Answer> result = new ArrayList<Answer>();
             try {
                 connection = dataSource.getConnection();
-                String sql = "SELECT * FROM Questions AS qst JOIN Answers AS ans ON qst.id = ans.id_question";
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql);
+                //String sql = "SELECT * FROM Questions AS qst JOIN Answers AS ans ON qst.id = ans.id_question + WHERE qst.id = ?" ;
+                String sql = "SELECT * FROM Answers WHERE id_question = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, question.getId());
+                ResultSet resultSet = preparedStatement.executeQuery(sql);
                 while (resultSet.next()) {
                     Answer answer = new Answer();
                     answer.setId(resultSet.getInt("ans.id"));

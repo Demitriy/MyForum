@@ -32,6 +32,6 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     public List<Answer> getAnswers(Question question) {
-        return answerDAO.getAnswers(question);
+        return answerDAO.getAnswersByQuestion(question);
     }
 }

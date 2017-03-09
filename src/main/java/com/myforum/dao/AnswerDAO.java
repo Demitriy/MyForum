@@ -2,6 +2,7 @@ package com.myforum.dao;
 
 import com.myforum.database.Answer;
 import com.myforum.database.Question;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ public interface AnswerDAO {
 
     void addAnswer(Answer answer);
 
-    List<Answer> getAnswers(Question question);
+    List<Answer> getAnswersByQuestion(Question question);
 
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by dsvetyshov on 06.03.2017.
  */
 @Repository
-public class QuestionDAOImpl implements QuestionDAO {
+public class QuestionMySQLDAO implements QuestionDAO {
 
     @Autowired
     @Qualifier(value = "dataSource")
@@ -36,11 +36,10 @@ public class QuestionDAOImpl implements QuestionDAO {
             Connection connection = null;
             try {
                 connection = dataSource.getConnection();
-                String sql = "INSERT INTO Questions (id, title, content) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO Questions (title, content) VALUE (?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setInt(1, question.getId());
-                preparedStatement.setString(2, question.getTitle());
-                preparedStatement.setString(3, question.getContent());
+                preparedStatement.setString(1, question.getTitle());
+                preparedStatement.setString(2, question.getContent());
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 System.out.println("SQLException : QuestionDAOImpl : 44");
