@@ -16,13 +16,15 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionDAO questionDAO;
 
-    public QuestionDAO getQuestionDAO() {
+    //обезательно ли сеттер для аннотаци Autowired
+
+/*    public QuestionDAO getQuestionDAO() {
         return questionDAO;
     }
 
     public void setQuestionDAO(QuestionDAO questionDAO) {
         this.questionDAO = questionDAO;
-    }
+    }*/
 
     public void addQuestion(Question question) {
         questionDAO.addQuestion(question);

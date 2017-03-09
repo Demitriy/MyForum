@@ -17,13 +17,15 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private AnswerDAO answerDAO;
 
-    public AnswerDAO getAnswerDAO() {
+    //обезательно ли сеттер для аннотаци Autowired
+
+/*    public AnswerDAO getAnswerDAO() {
         return answerDAO;
     }
 
     public void setAnswerDAO(AnswerDAO answerDAO) {
         this.answerDAO = answerDAO;
-    }
+    }*/
 
     public void addAnswer(Answer answer) {
         answerDAO.addAnswer(answer);

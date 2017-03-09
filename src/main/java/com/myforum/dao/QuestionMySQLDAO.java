@@ -21,13 +21,15 @@ public class QuestionDAOImpl implements QuestionDAO {
     @Qualifier(value = "dataSource")
     private DataSource dataSource;
 
-    public DataSource getDataSource() {
+    //обезательно ли сеттер для аннотаци Autowired
+
+/*    public DataSource getDataSource() {
         return dataSource;
     }
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
+    }*/
 
     public void addQuestion(Question question) {
         if (dataSource != null) {
