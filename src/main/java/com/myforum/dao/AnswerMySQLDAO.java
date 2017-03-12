@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,11 +26,21 @@ public class AnswerMySQLDAO implements AnswerDAO {
 
     //обезательно ли сеттер для аннотаци Autowired
 
-/*    public DataSource getDataSource() {
+    public DataSource getDataSource() {
         return dataSource;
     }
 
-    public void setDataSource(DataSource dataSource) {
+/*    public AnswerMySQLDAO() {
+        try {
+            Context initContext = new InitialContext();
+            dataSource = (DataSource) initContext.lookup("java:comp/env/jdbc/myforum");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+
+    }*/
+
+    /*  public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }*/
 
@@ -35,13 +48,15 @@ public class AnswerMySQLDAO implements AnswerDAO {
         if (dataSource != null) {
             Connection connection = null;
             try {
-                connection = dataSource.getConnection();
+               // connection = dataSource.getConnection();
+
+
                 String sql = "INSERT INTO Answers (id_question, content) VALUE (?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, answer.getQuestion().getId());
                 preparedStatement.setString(2, answer.getComment());
                 preparedStatement.executeUpdate();
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 System.out.println("SQLException : AnswerDAOImpl : 44");
                 e.printStackTrace();
             } finally {
