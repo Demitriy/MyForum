@@ -21,37 +21,14 @@ import java.util.List;
 public class AnswerMySQLDAO implements AnswerDAO {
 
     @Autowired
-    @Qualifier(value = "dataSource")
     private DataSource dataSource;
-
-    //обезательно ли сеттер для аннотаци Autowired
-
-    public DataSource getDataSource() {
-        return dataSource;
-    }
-
-/*    public AnswerMySQLDAO() {
-        try {
-            Context initContext = new InitialContext();
-            dataSource = (DataSource) initContext.lookup("java:comp/env/jdbc/myforum");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-
-    }*/
-
-    /*  public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }*/
 
     public void addAnswer(Answer answer) {
         if (dataSource != null) {
             Connection connection = null;
             try {
-               // connection = dataSource.getConnection();
-
-
-                String sql = "INSERT INTO Answers (id_question, content) VALUE (?, ?)";
+                connection = dataSource.getConnection();
+                String sql = "INSERT INTO Answers (id_question, comment) VALUE (?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, answer.getQuestion().getId());
                 preparedStatement.setString(2, answer.getComment());

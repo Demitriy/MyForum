@@ -1,7 +1,6 @@
 package com.myforum.service;
 
 import com.myforum.dao.AnswerDAO;
-import com.myforum.dao.AnswerMySQLDAO;
 import com.myforum.database.Answer;
 import com.myforum.database.Question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +15,7 @@ import java.util.List;
 public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
-    private AnswerMySQLDAO answerDAO;
-
-    //обезательно ли сеттер для аннотаци Autowired
-
-   public AnswerMySQLDAO getAnswerDAO() {
-        return answerDAO;
-    }
-
-    /*public void setAnswerDAO(AnswerDAO answerDAO) {
-        this.answerDAO = answerDAO;
-    }*/
+    private AnswerDAO answerDAO;
 
     public void addAnswer(Answer answer) {
         answerDAO.addAnswer(answer);

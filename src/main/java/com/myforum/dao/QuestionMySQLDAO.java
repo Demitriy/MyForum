@@ -18,18 +18,7 @@ import java.util.List;
 public class QuestionMySQLDAO implements QuestionDAO {
 
     @Autowired
-    @Qualifier(value = "dataSource")
     private DataSource dataSource;
-
-    //обезательно ли сеттер для аннотаци Autowired
-
-/*    public DataSource getDataSource() {
-        return dataSource;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }*/
 
     public void addQuestion(Question question) {
         if (dataSource != null) {

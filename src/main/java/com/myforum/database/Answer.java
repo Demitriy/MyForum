@@ -9,6 +9,14 @@ public class Answer {
     private Question question;
     private String comment;
 
+    public Answer() {
+    }
+
+    public Answer(Question question, String comment) {
+        this.question = question;
+        this.comment = comment;
+    }
+
     public int getId() {
         return id;
     }
