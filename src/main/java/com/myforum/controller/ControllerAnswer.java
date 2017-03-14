@@ -24,13 +24,13 @@ public class ControllerAnswer {
     @Autowired
     private AnswerService answerService;
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(path = "/", method = RequestMethod.GET)
     public String firstTry(HttpServletRequest request) {
         System.out.println(request.getContextPath());
         System.out.println(request.getSession());
         Question question = new Question();
         question.setId(1);
-        answerService.addAnswer(new Answer(question, "Privetk"));
-        return "/index";
+        //answerService.addAnswer(new Answer(question, "Privetk"));
+        return "index";
     }
 }
