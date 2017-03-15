@@ -79,4 +79,37 @@ public class QuestionMySQLDAO implements QuestionDAO {
         }
         return null;
     }
+
+    public Question getQuestionByID(Integer id) {
+        if (dataSource != null) {
+            Connection connection = null;
+            try {
+                connection = dataSource.getConnection();
+                String sql = "SELECT * FROM Questions WHERE id = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    Question question = new Question();
+                    question.setId(resultSet.getInt("id"));
+                    question.setTitle(resultSet.getString("title"));
+                    question.setContent(resultSet.getString("content"));
+                    return question;
+                }
+            } catch (SQLException e) {
+                System.out.println("SQLException : QuestionDAOImpl : 77");
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (connection != null) connection.close();
+                } catch (SQLException e) {
+                    System.out.println("SQLException : QuestionDAOImpl : 83");
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            System.out.println("dataSource is null : QuestionDAOImpl : 88");
+        }
+        return null;
+    }
 }

@@ -12,4 +12,6 @@ public interface QuestionService {
     void addQuestion(Question question);
 
     List<Question> getAllQuestions();
+
+    Question getQuestionByID(Integer id);
 }
