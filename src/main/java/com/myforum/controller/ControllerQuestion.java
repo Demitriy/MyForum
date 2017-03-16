@@ -38,7 +38,7 @@ public class ControllerQuestion {
 
     @GetMapping("/NewQuestion")
     public String addQuestion() {
-        return "/addQuestion";
+        return "addQuestion";
     }
 
 }

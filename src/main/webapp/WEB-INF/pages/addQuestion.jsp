@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
 <body>
+    <c:import url="header.jsp"/>
     <div class="container">
         <form class="mt-5" action="/MyForum/" method="post">
             <div class="form-group">

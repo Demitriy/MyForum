@@ -59,11 +59,11 @@ public class AnswerMySQLDAO implements AnswerDAO {
                 String sql = "SELECT * FROM Answers WHERE id_question = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, question.getId());
-                ResultSet resultSet = preparedStatement.executeQuery(sql);
+                ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Answer answer = new Answer();
-                    answer.setId(resultSet.getInt("ans.id"));
-                    answer.setComment(resultSet.getString("ans.comment"));
+                    answer.setId(resultSet.getInt("id"));
+                    answer.setComment(resultSet.getString("comment"));
                     answer.setQuestion(question);
                     result.add(answer);
                 }

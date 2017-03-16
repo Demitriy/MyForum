@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
 <body>
+<c:import url="header.jsp"/>
 <div class="container">
-    <div class="d-flex mt-5">
+    <div class="d-flex mt-4">
         <div class="ml-auto p-2 pb-4">
             <a class="btn btn-success" href="/MyForum/NewQuestion" role="button">Add question</a>
         </div>
