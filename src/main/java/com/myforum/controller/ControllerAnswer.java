@@ -35,7 +35,7 @@ public class ControllerAnswer {
         return new ModelAndView("addAnswerOnQuestion", map);
     }
 
-    @PostMapping("/question/{questinId}")
+    @PostMapping("/question/{questinId:[0-9]+}")
     public String addComment(@PathVariable String questinId, @RequestParam("answer") String answer) {
         Answer myAnswer = new Answer();
         myAnswer.setComment(answer);

@@ -16,8 +16,8 @@
                 <a class="nav-link" href="/MyForum/">Home<span class="sr-only"></span></a>
             </li>
         </ul>
-        <form class="input-group my-2 my-lg-0" action="#" method="post">
-            <input class="form-control" type="text" placeholder="Search">
+        <form class="input-group my-2 my-lg-0" action="search" method="post">
+            <input class="form-control" type="text" placeholder="Search" id="search" name="search">
             <span class="input-group-btn">
                 <button class="btn btn-secondary" type="submit">Go!</button>
             </span>

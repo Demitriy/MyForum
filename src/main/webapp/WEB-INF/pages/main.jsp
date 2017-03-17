@@ -15,26 +15,19 @@
 <div class="container">
     <div class="d-flex mt-4">
         <div class="ml-auto p-2 pb-4">
-            <a class="btn btn-success" href="/MyForum/NewQuestion" role="button">Add question</a>
+            <a class="btn btn-success" href="NewQuestion" role="button">Add question</a>
         </div>
     </div>
 
     <div>
         <c:forEach var="tmp" items="${listTitle}">
             <div class="alert alert-info">
-                <a href="/MyForum/question/${tmp.id}"><strong>${tmp.title}</strong></a>
+                <a href="question/${tmp.id}"><strong>${tmp.title}</strong></a>
             </div>
         </c:forEach>
     </div>
-
-<span class="badge badge-pill badge-default">Default</span>
-<span class="badge badge-pill badge-primary">Primary</span>
-<span class="badge badge-pill badge-success">Success</span>
-<span class="badge badge-pill badge-info">Info</span>
-<span class="badge badge-pill badge-warning">Warning</span>
-<span class="badge badge-pill badge-danger">Danger</span>
-
 </div>
+<%--<c:import url="footer.jsp"/>--%>
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <%--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

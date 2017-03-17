@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
-<body>
+<body class="bg-faded">
     <c:import url="header.jsp"/>
     <div class="container bg-faded">
         <div class="card-block mt-5">
@@ -20,7 +20,7 @@
                 <hr>
             </c:forEach>
         </div>
-        <form action="/MyForum/question/${question.id}" method="post">
+        <form action="" method="post">
             <div class="mt-2">
                 <div class="form-group">
                     <label for="answer">Comment</label>
@@ -32,5 +32,6 @@
             </div>
         </form>
     </div>
+<%--    <c:import url="footer.jsp"/>--%>
 </body>
 </html>

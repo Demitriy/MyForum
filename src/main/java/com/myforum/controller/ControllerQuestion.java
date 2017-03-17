@@ -41,4 +41,10 @@ public class ControllerQuestion {
         return "addQuestion";
     }
 
+    @PostMapping("/**/search")
+    public ModelAndView search(@RequestParam("search") String title) {
+        System.out.println("working!");
+        List<Question> list = questionService.getQuestionsByTitle(title);
+        return new ModelAndView("main", "listTitle", list);
+    }
 }

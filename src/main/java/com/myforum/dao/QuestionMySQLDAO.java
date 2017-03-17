@@ -112,4 +112,39 @@ public class QuestionMySQLDAO implements QuestionDAO {
         }
         return null;
     }
+
+    public List<Question> getQuestionsByTitle(String title) {
+        if (dataSource != null) {
+            Connection connection = null;
+            List<Question> result = new ArrayList<Question>();
+            try {
+                connection = dataSource.getConnection();
+                String sql = "SELECT * FROM Questions WHERE title LIKE '% \\? %'";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, title);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Question question = new Question();
+                    question.setId(resultSet.getInt("id"));
+                    question.setTitle(resultSet.getString("title"));
+                    question.setContent(resultSet.getString("content"));
+                    result.add(question);
+                }
+                return result;
+            } catch (SQLException e) {
+                System.out.println("SQLException : QuestionDAOImpl : 136");
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (connection != null) connection.close();
+                } catch (SQLException e) {
+                    System.out.println("SQLException : QuestionDAOImpl : 141");
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            System.out.println("dataSource is null : QuestionDAOImpl : 88");
+        }
+        return null;
+    }
 }

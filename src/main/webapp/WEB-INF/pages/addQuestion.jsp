@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html lang="en">
+<html>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
-<body>
+<body class="bg-faded">
     <c:import url="header.jsp"/>
     <div class="container">
         <form class="mt-5" action="/MyForum/" method="post">
@@ -20,5 +20,6 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+<%--    <c:import url="footer.jsp"/>--%>
 </body>
 </html>
