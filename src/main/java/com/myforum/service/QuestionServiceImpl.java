@@ -16,8 +16,8 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionDAO questionDAO;
 
-    public void addQuestion(Question question) {
-        questionDAO.addQuestion(question);
+    public boolean addQuestion(Question question) {
+       return questionDAO.addQuestion(question);
     }
 
     public List<Question> getAllQuestions() {
@@ -28,7 +28,7 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.getQuestionByID(id);
     }
 
-    public List<Question> getQuestionsByTitle(String title) {
+    public List<Question> searchByTitle(String title) {
         return questionDAO.getQuestionsByTitle(title);
     }
 }

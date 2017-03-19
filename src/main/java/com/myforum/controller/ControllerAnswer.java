@@ -25,22 +25,22 @@ public class ControllerAnswer {
     @Autowired
     private QuestionService questionService;
 
-    @GetMapping("/question/{questinId}")
-    public ModelAndView showAnswers(@PathVariable String questinId) {
-        Question question = questionService.getQuestionByID(Integer.valueOf(questinId));
+    @GetMapping("/**/question/{questinId:[0-9]+}")
+    public ModelAndView showAnswers(@PathVariable int questinId) {
+        Question question = questionService.getQuestionByID(questinId);
         List<Answer> list = answerService.getAnswers(question);
         Map<String, Object> map = new HashMap<>();
         map.put("question", question);
         map.put("answers", list);
-        return new ModelAndView("addAnswerOnQuestion", map);
+        return new ModelAndView("addionAnswerOnQuestion", map);
     }
 
-    @PostMapping("/question/{questinId:[0-9]+}")
-    public String addComment(@PathVariable String questinId, @RequestParam("answer") String answer) {
+    @PostMapping("/**/question/{questinId:[0-9]+}")
+    public String addComment(@PathVariable int questinId, @RequestParam("answer") String answer) {
         Answer myAnswer = new Answer();
         myAnswer.setComment(answer);
-        myAnswer.setQuestion(questionService.getQuestionByID(Integer.valueOf(questinId)));
+        myAnswer.setQuestion(questionService.getQuestionByID(questinId));
         answerService.addAnswer(myAnswer);
-        return "redirect:/question/"+questinId;
+        return "redirect:/MyForum/question/"+questinId;
     }
 }

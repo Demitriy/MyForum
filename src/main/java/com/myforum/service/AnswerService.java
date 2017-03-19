@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface AnswerService {
 
-    void addAnswer(Answer answer);
+    boolean addAnswer(Answer answer);
 
     List<Answer> getAnswers(Question question);
 

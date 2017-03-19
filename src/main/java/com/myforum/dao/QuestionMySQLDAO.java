@@ -20,7 +20,7 @@ public class QuestionMySQLDAO implements QuestionDAO {
     @Autowired
     private DataSource dataSource;
 
-    public void addQuestion(Question question) {
+    public boolean addQuestion(Question question) {
         if (dataSource != null) {
             Connection connection = null;
             try {
@@ -30,20 +30,20 @@ public class QuestionMySQLDAO implements QuestionDAO {
                 preparedStatement.setString(1, question.getTitle());
                 preparedStatement.setString(2, question.getContent());
                 preparedStatement.executeUpdate();
+                return true;
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 44");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 50");
                     e.printStackTrace();
                 }
             }
         } else {
             System.out.println("dataSource is null : QuestionDAOImpl : 55");
         }
+        return false;
     }
 
     public List<Question> getAllQuestions() {
@@ -64,13 +64,11 @@ public class QuestionMySQLDAO implements QuestionDAO {
                 }
                 return result;
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 77");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 83");
                     e.printStackTrace();
                 }
             }
@@ -97,13 +95,11 @@ public class QuestionMySQLDAO implements QuestionDAO {
                     return question;
                 }
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 77");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 83");
                     e.printStackTrace();
                 }
             }
@@ -119,10 +115,9 @@ public class QuestionMySQLDAO implements QuestionDAO {
             List<Question> result = new ArrayList<Question>();
             try {
                 connection = dataSource.getConnection();
-                String sql = "SELECT * FROM Questions WHERE title LIKE '% \\? %'";
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, title);
-                ResultSet resultSet = preparedStatement.executeQuery();
+                String sql = "SELECT * FROM Questions WHERE title LIKE '%"+title+"%'";
+                Statement preparedStatement = connection.createStatement();
+                ResultSet resultSet = preparedStatement.executeQuery(sql);
                 while (resultSet.next()) {
                     Question question = new Question();
                     question.setId(resultSet.getInt("id"));
@@ -132,13 +127,11 @@ public class QuestionMySQLDAO implements QuestionDAO {
                 }
                 return result;
             } catch (SQLException e) {
-                System.out.println("SQLException : QuestionDAOImpl : 136");
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) connection.close();
                 } catch (SQLException e) {
-                    System.out.println("SQLException : QuestionDAOImpl : 141");
                     e.printStackTrace();
                 }
             }

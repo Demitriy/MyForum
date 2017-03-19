@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface QuestionDAO {
 
-    void addQuestion(Question question);
+    boolean addQuestion(Question question);
 
     List<Question> getAllQuestions();
 

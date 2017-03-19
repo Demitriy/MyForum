@@ -23,7 +23,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
     @Autowired
     private DataSource dataSource;
 
-    public void addAnswer(Answer answer) {
+    public boolean addAnswer(Answer answer) {
         if (dataSource != null) {
             Connection connection = null;
             try {
@@ -33,6 +33,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
                 preparedStatement.setInt(1, answer.getQuestion().getId());
                 preparedStatement.setString(2, answer.getComment());
                 preparedStatement.executeUpdate();
+                return true;
             } catch (Exception e) {
                 System.out.println("SQLException : AnswerDAOImpl : 44");
                 e.printStackTrace();
@@ -47,6 +48,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
         } else {
             System.out.println("dataSource is null : AnswerDAOImpl : 55");
         }
+        return false;
     }
 
     public List<Answer> getAnswersByQuestion(Question question) {

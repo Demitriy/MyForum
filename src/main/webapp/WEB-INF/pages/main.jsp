@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fm" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <!-- Required meta tags -->
@@ -15,14 +16,14 @@
 <div class="container">
     <div class="d-flex mt-4">
         <div class="ml-auto p-2 pb-4">
-            <a class="btn btn-success" href="NewQuestion" role="button">Add question</a>
+            <a class="btn btn-outline-primary" href="NewQuestion" role="button">Add question</a>
         </div>
     </div>
 
     <div>
         <c:forEach var="tmp" items="${listTitle}">
             <div class="alert alert-info">
-                <a href="question/${tmp.id}"><strong>${tmp.title}</strong></a>
+                <a href="question/${tmp.id}"><strong>${fm:toUpperCase(tmp.title)}</strong></a>
             </div>
         </c:forEach>
     </div>

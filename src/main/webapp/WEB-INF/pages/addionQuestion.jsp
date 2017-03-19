@@ -11,7 +11,14 @@
         <form class="mt-5" action="/MyForum/" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Question`s title" name="title" required>
+                <c:if test="${flag}">
+                    <c:set var="style" value="border-color: red"/>
+                </c:if>
+                <input type="text" class="form-control" style="${style}" id="title" aria-describedby="emailHelp"
+                       placeholder="Question`s title" name="title" value="${value}" required>
+                <c:if test="${flag}">
+                    <div class="form-control-feedback" style="color: red">Sorry, that title's taken. Try another?</div>
+                </c:if>
             </div>
             <div class="form-group">
                 <label for="content">Question</label>

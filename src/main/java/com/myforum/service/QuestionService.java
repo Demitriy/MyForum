@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface QuestionService {
 
-    void addQuestion(Question question);
+    boolean addQuestion(Question question);
 
     List<Question> getAllQuestions();
 
     Question getQuestionByID(Integer id);
 
-    List<Question> getQuestionsByTitle(String title);
+    List<Question> searchByTitle(String title);
 }

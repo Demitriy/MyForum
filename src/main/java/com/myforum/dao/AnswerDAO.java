@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface AnswerDAO {
 
-    void addAnswer(Answer answer);
+    boolean addAnswer(Answer answer);
 
     List<Answer> getAnswersByQuestion(Question question);
 

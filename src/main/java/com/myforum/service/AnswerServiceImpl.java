@@ -17,8 +17,8 @@ public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private AnswerDAO answerDAO;
 
-    public void addAnswer(Answer answer) {
-        answerDAO.addAnswer(answer);
+    public boolean addAnswer(Answer answer) {
+       return answerDAO.addAnswer(answer);
     }
 
     public List<Answer> getAnswers(Question question) {
