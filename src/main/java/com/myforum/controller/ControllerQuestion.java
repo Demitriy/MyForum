@@ -47,7 +47,7 @@ public class ControllerQuestion {
         Question question = new Question();
         question.setTitle(title.toLowerCase());
         question.setContent(content);
-        if (questionService.addQuestion(question)) return main("");
+        if (questionService.addQuestion(question)) return main(null);
         else {
             Map<String, Object> map = new HashMap<>();
             map.put("flag", true);

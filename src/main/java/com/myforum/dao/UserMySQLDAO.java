@@ -46,12 +46,12 @@ public class UserMySQLDAO implements UserDAO {
         return false;
     }
 
-    public User getUserByLogin(String login) {
+    public User getUserByLoginOrEmail(String value) {
         if (dataSource != null) {
             Connection connection = null;
             try {
                 connection = dataSource.getConnection();
-                String sql = "SELECT * from Users WHERE login=" + login + " OR email=" + login;
+                String sql = "SELECT * from Users WHERE login=" + value + " OR email=" + value;
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql);
                 if (resultSet.next()) {

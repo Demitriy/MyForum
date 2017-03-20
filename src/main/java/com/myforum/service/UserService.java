@@ -9,4 +9,5 @@ public interface UserService {
 
     boolean addUser(User user);
 
+    boolean loginExistOrEmail(String value);
 }

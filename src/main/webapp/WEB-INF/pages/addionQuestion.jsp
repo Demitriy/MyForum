@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="title">Title</label>
                 <c:if test="${flag}">
-                    <c:set var="style" value="border-color: red"/>
+                    <c:set var="style" value="border-color: red; border-width: 2px"/>
                 </c:if>
                 <input type="text" class="form-control" style="${style}" id="title" aria-describedby="emailHelp"
                        placeholder="Question`s title" name="title" value="${value}" required>

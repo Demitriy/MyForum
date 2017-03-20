@@ -19,4 +19,8 @@ public class UserServiceImpl implements UserService{
     public boolean addUser(User user) {
         return userDAO.addUser(user);
     }
+
+    public boolean loginExistOrEmail(String value) {
+        return userDAO.getUserByLoginOrEmail(value) != null ? true : false;
+    }
 }
