@@ -51,7 +51,7 @@ public class UserMySQLDAO implements UserDAO {
             Connection connection = null;
             try {
                 connection = dataSource.getConnection();
-                String sql = "SELECT * from Users WHERE login=" + value + " OR email=" + value;
+                String sql = "SELECT * from Users WHERE login='" + value + "' OR email='" + value+"'";
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql);
                 if (resultSet.next()) {
@@ -59,7 +59,9 @@ public class UserMySQLDAO implements UserDAO {
                     user.setId(resultSet.getInt("id"));
                     user.setLogin(resultSet.getString("login")) ;
                     user.setPassword(resultSet.getString("password"));
-                    user.setName(resultSet.getString("name"));
+                    String name = resultSet.getString("name");
+                    name = (name == null) ? "" : name;
+                    user.setName(name);
                     user.setEmail(resultSet.getString("email"));
                     return user;
                 }

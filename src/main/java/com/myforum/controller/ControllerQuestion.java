@@ -31,13 +31,10 @@ public class ControllerQuestion {
 
     @GetMapping("/")
     public ModelAndView main(@RequestParam(value = "search", required = false) String search)  {
-        System.out.println("break");
         List<Question> list;
         if (search == null || search.trim().equals("")) list = questionService.getAllQuestions();
         else {
-            System.out.println("SEARCH");
             list = questionService.searchByTitle(search);
-            //System.out.println(search);
         }
         return new ModelAndView("main", "listTitle", list);
     }
@@ -45,7 +42,7 @@ public class ControllerQuestion {
     @PostMapping("/")
     public ModelAndView addQuestion(@RequestParam("title") String title, @RequestParam("content") String content) {
         Question question = new Question();
-        question.setTitle(title.toLowerCase());
+        question.setTitle(title);
         question.setContent(content);
         if (questionService.addQuestion(question)) return main(null);
         else {

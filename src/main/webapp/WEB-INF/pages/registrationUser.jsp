@@ -15,11 +15,11 @@
                     <c:set var="style1" value="border-color: red; border-width: 2px"/>
                 </c:if>
                 <div class="col-8">
-                    <input class="form-control" style="${style1}" type="text" placeholder="login" id="login" name="login" required>
+                    <input class="form-control" style="${style1}" type="text" placeholder="login" id="login" name="login" value="${val_login}" required>
+                    <c:if test="${flag == 1}">
+                        <small class="form-control-feedback" style="color: red">${error}</small>
+                    </c:if>
                 </div>
-                <c:if test="${flag == 1}">
-                    <div class="form-control-feedback" style="color: red">${error}</div>
-                </c:if>
             </div>
             <div class="form-group row">
                 <label for="password" class="col-2 col-form-label">Password</label>
@@ -34,27 +34,27 @@
                 <label for="confirm" class="col-2 col-form-label">Confirm password</label>
                 <div class="col-8">
                     <input class="form-control" style="${style2}" type="password" placeholder="password" id="confirm" name="confirm" required>
+                    <c:if test="${flag == 2}">
+                        <small class="form-control-feedback" style="color: red">${error}</small>
+                    </c:if>
                 </div>
-                <c:if test="${flag == 2}">
-                    <div class="form-control-feedback" style="color: red">${error}</div>
-                </c:if>
             </div>
             <div class="form-group row">
                 <label for="email" class="col-2 col-form-label">Email</label>
-                <c:if test="${flag == 2}">
-                    <c:set var="style2" value="border-color: red; border-width: 2px"/>
+                <c:if test="${flag == 3}">
+                    <c:set var="style3" value="border-color: red; border-width: 2px"/>
                 </c:if>
                 <div class="col-8">
-                    <input class="form-control" style="${style3}" type="text" placeholder="myForum@example.com" id="email" name="email" required>
+                    <input class="form-control" style="${style3}" type="text" placeholder="myForum@example.com" id="email" name="email" value="${val_email}" required>
+                    <c:if test="${flag == 3}">
+                        <small class="form-control-feedback" style="color: red">${error}</small>
+                    </c:if>
                 </div>
-                <c:if test="${flag == 3}">
-                    <div class="form-control-feedback" style="color: red">${error}</div>
-                </c:if>
             </div>
             <div class="form-group row">
                 <label for="name" class="col-2 col-form-label">Name</label>
                 <div class="col-8">
-                    <input class="form-control" type="text" placeholder="Your name" id="name">
+                    <input class="form-control" type="text" placeholder="Your name" id="name" name="name"  value="${val_name}">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary ">Submit</button>

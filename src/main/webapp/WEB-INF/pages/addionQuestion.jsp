@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" style="${style}" id="title" aria-describedby="emailHelp"
                        placeholder="Question`s title" name="title" value="${value}" required>
                 <c:if test="${flag}">
-                    <div class="form-control-feedback" style="color: red">Sorry, that title's taken. Try another?</div>
+                    <small class="form-control-feedback" style="color: red">Sorry, that title's taken. Try another?</small>
                 </c:if>
             </div>
             <div class="form-group">

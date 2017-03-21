@@ -1,23 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Dima
-  Date: 19.03.2017
-  Time: 23:12
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
 <body>
-<div class="card w-75">
-    <div class="card-block">
-        <h3 class="card-title">Card title</h3>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Button</a>
+    <div class="container">
+    <div class="card w-75">
+        <div class="card-block">
+            <h3 class="card-title">Registration are successful</h3>
+            <p class="card-text">Congratulation!<cite title="Source Title"> ${text} </cite>shouldn`t tell anyone your login and password.</p>
+            <a href="#" class="btn btn-primary">Go Home</a>
+            <a href="#" class="btn btn-primary">Sign in</a>
+        </div>
     </div>
 </div>
-
 </body>
 </html>

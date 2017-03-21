@@ -24,7 +24,7 @@ public class User {
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.login = login.toLowerCase().trim();
     }
 
     public String getPassword() {
@@ -32,7 +32,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password.trim();
     }
 
     public String getName() {
@@ -40,7 +40,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     public String getEmail() {
@@ -48,6 +48,6 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase().trim();
     }
 }
