@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Created by Dima on 06.03.2017.
  */
+//coment2
 //comment
 @Repository
 public class AnswerMySQLDAO implements AnswerDAO {
