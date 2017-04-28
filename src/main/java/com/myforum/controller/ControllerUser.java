@@ -19,6 +19,7 @@ import java.util.Map;
  * Created by Dima on 19.03.2017.
  */
 @Controller
+//coment
 public class ControllerUser {
 
     @Autowired
