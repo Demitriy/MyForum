@@ -17,13 +17,12 @@ import java.util.List;
 /**
  * Created by Dima on 06.03.2017.
  */
-//coment2
-//comment
+
 @Repository
 public class AnswerMySQLDAO implements AnswerDAO {
 
     @Autowired
-    private DataSource data;
+    private DataSource dataSource;
 
     public boolean addAnswer(Answer answer) {
         if (dataSource != null) {
