@@ -31,7 +31,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
                 String sql = "INSERT INTO Answers (id_question, comment) VALUE (?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, answer.getQuestion().getId());
-                preparedStatement.setString(2, answer.getComment());
+                preparedStatement.setNString(2, answer.getComment());
                 preparedStatement.executeUpdate();
                 return true;
             } catch (Exception e) {
@@ -65,7 +65,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
                 while (resultSet.next()) {
                     Answer answer = new Answer();
                     answer.setId(resultSet.getInt("id"));
-                    answer.setComment(resultSet.getString("comment"));
+                    answer.setComment(resultSet.getNString("comment"));
                     answer.setQuestion(question);
                     result.add(answer);
                 }

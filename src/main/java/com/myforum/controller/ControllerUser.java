@@ -52,6 +52,10 @@ public class ControllerUser {
             map.put("flag", 3);
             map.put("error", ErrorMsg.EMAIL);
             return new ModelAndView("registrationUser", map);
+        } else if (!email.matches("[a-zA-Z0-9.]+@[a-zA-Z]+\\.[a-zA-Z]+")) {
+            map.put("flag", 3);
+            map.put("error", ErrorMsg.INVALID_EMAIL);
+            return new ModelAndView("registrationUser", map);
         }
         else {
             User user = new User();

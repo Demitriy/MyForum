@@ -18,7 +18,7 @@ public class AnswerServiceImpl implements AnswerService {
     private AnswerDAO answerDAO;
 
     public boolean addAnswer(Answer answer) {
-       return answerDAO.addAnswer(answer);
+        return answerDAO.addAnswer(answer);
     }
 
     public List<Answer> getAnswers(Question question) {
