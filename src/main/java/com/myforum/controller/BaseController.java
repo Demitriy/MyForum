@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 /**
  * Created by Dima on 20.08.2017.
  */
-@SessionAttributes()
+@SessionAttributes("role")
 public class BaseController {
 
     @ModelAttribute("role")
