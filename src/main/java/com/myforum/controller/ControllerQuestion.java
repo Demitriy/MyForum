@@ -1,9 +1,12 @@
 package com.myforum.controller;
 
+import com.myforum.database.Admin;
 import com.myforum.database.Question;
+import com.myforum.database.User;
 import com.myforum.service.AnswerService;
 import com.myforum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Conventions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
