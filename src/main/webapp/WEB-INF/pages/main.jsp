@@ -23,7 +23,7 @@
     <div>
         <c:forEach var="tmp" items="${listTitle}">
             <div class="alert alert-info">
-                <a href="question/${tmp.id}"><strong>${fm:toUpperCase(tmp.title)}</strong></a>
+                <a href="question/${tmp.getId()}"><strong>${fm:toUpperCase(tmp.getTitle())}</strong></a>
             </div>
         </c:forEach>
     </div>

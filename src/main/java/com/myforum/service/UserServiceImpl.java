@@ -17,7 +17,10 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     public boolean addUser(User user) {
-        if (user.getName() == null) user.setName("");
+        user.setLogin(user.getLogin().toUpperCase().trim());
+        user.setEmail(user.getEmail().toUpperCase().trim());
+        user.setPassword(user.getPassword().trim());
+        user.setName(user.getName() != null ? user.getName().trim() : null);
         return userDAO.addUser(user);
     }
 

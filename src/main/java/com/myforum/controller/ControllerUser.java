@@ -6,6 +6,7 @@ import com.myforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,7 @@ import java.util.Map;
 @Controller
 //coment
 //cooment2
-public class ControllerUser {
+public class ControllerUser extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -66,10 +67,14 @@ public class ControllerUser {
         }
     }
 
-    @GetMapping("")
-    public ModelAndView openLogin() {
+    @GetMapping("/**/login")
+    public String openLogin(ModelMap modelMap) {
+        return "login";
+    }
+
+    @PostMapping("/**/login")
+    public String SignIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
 
         return null;
     }
-
 }

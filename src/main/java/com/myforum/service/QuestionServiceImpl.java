@@ -17,7 +17,8 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionDAO questionDAO;
 
     public boolean addQuestion(Question question) {
-       return questionDAO.addQuestion(question);
+        question.setTitle(question.getTitle().trim());
+        return questionDAO.addQuestion(question);
     }
 
     public List<Question> getAllQuestions() {

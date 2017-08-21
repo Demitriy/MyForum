@@ -9,14 +9,14 @@
     <c:import url="header.jsp"/>
     <div class="container bg-faded">
         <div class="card-block mt-5">
-            <h4 class="card-title mt-2">${question.title}</h4>
-            <p class="card-text">${question.content}</p>
+            <h4 class="card-title mt-2">${question.getTitle()}</h4>
+            <p class="card-text">${question.getContent()}</p>
         </div>
         <div class="card-block mt-3">
             <h4 class="card-title">Answers</h4>
             <hr>
             <c:forEach var="answer" items="${answers}">
-                <div class="card-text mt-3">${answer.comment}</div>
+                <div class="card-text mt-3">${answer.getComment()}</div>
                 <hr>
             </c:forEach>
         </div>

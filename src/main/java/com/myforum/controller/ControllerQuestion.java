@@ -1,5 +1,6 @@
 package com.myforum.controller;
 
+import com.myforum.constants.Role;
 import com.myforum.database.Admin;
 import com.myforum.database.Question;
 import com.myforum.database.User;
@@ -27,32 +28,32 @@ import java.util.Map;
  * Created by dsvetyshov on 07.03.2017.
  */
 @Controller
-public class ControllerQuestion {
+public class ControllerQuestion extends BaseController {
 
     @Autowired
     private QuestionService questionService;
 
     @GetMapping("/")
-    public ModelAndView main(@RequestParam(value = "search", required = false) String search)  {
+    public String main(@RequestParam(value = "search", required = false) String search, ModelMap modelMap)  {
         List<Question> list;
         if (search == null || search.trim().equals("")) list = questionService.getAllQuestions();
         else {
             list = questionService.searchByTitle(search);
         }
-        return new ModelAndView("main", "listTitle", list);
+        modelMap.addAttribute("listTitle", list);
+        return "main";
     }
 
     @PostMapping("/")
-    public ModelAndView addQuestion(@RequestParam("title") String title, @RequestParam("content") String content) {
+    public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content, ModelMap modelMap) {
         Question question = new Question();
         question.setTitle(title);
         question.setContent(content);
-        if (questionService.addQuestion(question)) return main(null);
+        if (questionService.addQuestion(question)) return main(null, modelMap);
         else {
-            Map<String, Object> map = new HashMap<>();
-            map.put("flag", true);
-            map.put("value", title);
-            return new ModelAndView("addionQuestion", map);
+            modelMap.addAttribute("flag", true);
+            modelMap.addAttribute("value", title);
+            return "addionQuestion";
         }
     }
 

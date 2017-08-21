@@ -18,6 +18,7 @@ public class AnswerServiceImpl implements AnswerService {
     private AnswerDAO answerDAO;
 
     public boolean addAnswer(Answer answer) {
+        answer.setComment(answer.getComment().trim());
         return answerDAO.addAnswer(answer);
     }
 

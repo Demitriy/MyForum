@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by dsvetyshov on 07.03.2017.
  */
 @Controller
-public class ControllerAnswer {
+public class ControllerAnswer extends BaseController {
 
     @Autowired
     private AnswerService answerService;

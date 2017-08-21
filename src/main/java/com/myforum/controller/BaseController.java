@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class BaseController {
 
     @ModelAttribute("role")
-    public String getRole() {
-        return Role.GUEST.name();
+    public Role getRole() {
+        return Role.GUEST;
     }
 }

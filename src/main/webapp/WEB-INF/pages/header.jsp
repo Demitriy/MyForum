@@ -20,10 +20,10 @@
             </span>
         </form>
        <span class="pl-5">
-            <a href="registration" class="btn btn-secondary my-2 my-lg-0">Sign up</a>
+            <a href="/MyForum/registration" class="btn btn-secondary my-2 my-lg-0">Sign up</a>
         </span>
         <span class="px-3">
-            <a href="#" class="btn btn-secondary my-2 my-lg-0">Sign in</a>
+            <a href="/MyForum/login" class="btn btn-secondary my-2 my-lg-0">Sign in</a>
         </span>
     </div>
 </nav>

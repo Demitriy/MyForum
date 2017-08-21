@@ -22,7 +22,7 @@ public class Question {
     }
 
     public void setTitle(String title) {
-        this.title = title.toLowerCase().trim();
+        this.title = title;
     }
 
     public String getContent() {
