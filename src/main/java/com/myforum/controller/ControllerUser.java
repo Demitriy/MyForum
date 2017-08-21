@@ -1,6 +1,7 @@
 package com.myforum.controller;
 
 import com.myforum.constants.ErrorMsg;
+import com.myforum.constants.Role;
 import com.myforum.database.User;
 import com.myforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,7 @@ import java.util.Map;
  * Created by Dima on 19.03.2017.
  */
 @Controller
-//coment
-//cooment2
+@SessionAttributes("user")
 public class ControllerUser extends BaseController {
 
     @Autowired
@@ -41,12 +41,12 @@ public class ControllerUser extends BaseController {
             map.put("error", ErrorMsg.PASSWORD);
             return new ModelAndView("registrationUser", map);
         }
-        else if (userService.loginExistOrEmail(login.toLowerCase().trim())) {
+        else if (userService.existLoginOrEmail(login)) {
             map.put("flag", 1);
             map.put("error", ErrorMsg.lOGIN);
             return new ModelAndView("registrationUser", map);
         }
-        else if (userService.loginExistOrEmail(email.toLowerCase().trim())) {
+        else if (userService.existLoginOrEmail(email)) {
             map.put("flag", 3);
             map.put("error", ErrorMsg.EMAIL);
             return new ModelAndView("registrationUser", map);
@@ -60,7 +60,6 @@ public class ControllerUser extends BaseController {
             user.setLogin(login);
             user.setPassword(password);
             user.setEmail(email);
-            if (name == null || name.trim().equals("")) name = "";
             user.setName(name);
             userService.addUser(user);
             return new ModelAndView("greetingCard", "text", login);
@@ -68,13 +67,20 @@ public class ControllerUser extends BaseController {
     }
 
     @GetMapping("/**/login")
-    public String openLogin(ModelMap modelMap) {
+    public String openLogin() {
         return "login";
     }
 
     @PostMapping("/**/login")
     public String SignIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
-
-        return null;
+        User user = userService.getUser(login, password);
+        if (user != null) {
+            modelMap.addAttribute("user", user);
+            modelMap.addAttribute("role", Role.USER);
+            return "forward:/MyForum/";
+        }
+        modelMap.addAttribute("flag", true);
+        modelMap.addAttribute("error", ErrorMsg.INVALID_SIGN_IN);
+        return "login";
     }
 }

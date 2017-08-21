@@ -12,7 +12,7 @@
                 <h3 class="card-title">Registration is successful</h3>
                 <p class="card-text">Congratulation!<cite title="Source Title"> ${text} </cite>shouldn`t tell anyone your login and password.</p>
                 <a href="/MyForum/" class="btn btn-primary">Go Home</a>
-                <a href="#" class="btn btn-primary">Sign in</a>
+                <a href="/MyForum/login" class="btn btn-primary">Sign in</a>
             </div>
         </div>
     </div>

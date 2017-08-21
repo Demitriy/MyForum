@@ -24,7 +24,17 @@ public class UserServiceImpl implements UserService {
         return userDAO.addUser(user);
     }
 
-    public boolean loginExistOrEmail(String value) {
-        return userDAO.getUserByLoginOrEmail(value) != null ? true : false;
+    public boolean existLoginOrEmail(String value) {
+        return userDAO.getUserByLoginOrEmail(value.toUpperCase().trim()) != null ? true : false;
+    }
+
+    public User getUser(String login, String password) {
+        User user = userDAO.getUserByLoginOrEmail(login);
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
     }
 }

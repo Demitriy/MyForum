@@ -6,7 +6,7 @@
      <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
 <body class = "bg-faded">
-<div class="container">
+<div class="container mt-5">
     <form method="post" action="">
         <div class="form-group row">
             <label for="login" class="col-sm-2 col-form-label">Login/Email</label>
@@ -18,15 +18,16 @@
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <c:if test="${flag}">
+                    <small class="form-control-feedback" style="color: red">${error}</small>
+                </c:if>
             </div>
-            <c:if test="${flag}">
-                <small class="form-control-feedback" style="color: red">${error}</small>
-            </c:if>
         </div>
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
+            <a href="/MyForum/" class="btn btn-primary">Go Home</a>
         </div>
     </form>
 </div>

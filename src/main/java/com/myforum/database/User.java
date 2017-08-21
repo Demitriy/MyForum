@@ -41,7 +41,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name.trim();
+        this.name = name;
     }
 
     public String getEmail() {
