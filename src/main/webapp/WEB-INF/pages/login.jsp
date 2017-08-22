@@ -25,9 +25,9 @@
         </div>
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-primary">Ok</button>
+                <a href="/MyForum/" class="btn btn-primary ml-2">Cancel</a>
             </div>
-            <a href="/MyForum/" class="btn btn-primary">Go Home</a>
         </div>
     </form>
 </div>

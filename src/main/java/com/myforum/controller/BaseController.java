@@ -12,6 +12,7 @@ public class BaseController {
 
     @ModelAttribute("role")
     public Role getRole() {
+        System.out.println("getRole");
         return Role.GUEST;
     }
 }

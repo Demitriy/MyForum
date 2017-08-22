@@ -10,7 +10,7 @@
         <div class="card w-50 mx-auto mt-5">
             <div class="card-block">
                 <h3 class="card-title">Registration is successful</h3>
-                <p class="card-text">Congratulation!<cite title="Source Title"> ${text} </cite>shouldn`t tell anyone your login and password.</p>
+                <p class="card-text">Congratulation!<cite title="Source Title"> ${user.getLogin()} </cite>shouldn`t tell anyone your login or password.</p>
                 <a href="/MyForum/" class="btn btn-primary">Go Home</a>
                 <a href="/MyForum/login" class="btn btn-primary">Sign in</a>
             </div>

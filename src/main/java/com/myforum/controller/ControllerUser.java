@@ -10,6 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +66,7 @@ public class ControllerUser extends BaseController {
             user.setEmail(email);
             user.setName(name);
             userService.addUser(user);
-            return new ModelAndView("greetingCard", "text", login);
+            return new ModelAndView("greetingCard", "user", user);
         }
     }
 
@@ -72,15 +76,17 @@ public class ControllerUser extends BaseController {
     }
 
     @PostMapping("/**/login")
-    public String SignIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
+    public View SignIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
         User user = userService.getUser(login, password);
         if (user != null) {
             modelMap.addAttribute("user", user);
             modelMap.addAttribute("role", Role.USER);
-            return "forward:/MyForum/";
+            RedirectView redirectView = new RedirectView("/MyForum/");
+            redirectView.setExposeModelAttributes(false);
+            return redirectView;
         }
         modelMap.addAttribute("flag", true);
         modelMap.addAttribute("error", ErrorMsg.INVALID_SIGN_IN);
-        return "login";
+        return new ModelAndView("login").getView();
     }
 }

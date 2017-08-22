@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
 <body class="bg-faded">
-    <c:import url="header.jsp"/>
+    <%--<c:import url="header.jsp"/>--%>
     <div class="container">
         <form class="mt-5" method="post" action="">
             <div class="form-group row">
@@ -57,7 +57,13 @@
                     <input class="form-control" type="text" placeholder="Your name" id="name" name="name"  value="${val_name}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary ">Submit</button>
+            <div class="form-group row">
+                <label class="col-2 col-form-label"></label>
+                <div class="col-8">
+                    <button type="submit" class="btn btn-primary mt-3">Ok</button>
+                    <a href="/MyForum/" class="btn btn-primary ml-2 mt-3">Cancel</a>
+                </div>
+            </div>
         </form>
     </div>
 </body>

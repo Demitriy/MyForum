@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 </head>
 <body class="bg-faded">
-    <c:import url="header.jsp"/>
+<%--    <c:import url="header.jsp"/>--%>
     <div class="container">
         <form class="mt-5" action="/MyForum/" method="post">
             <div class="form-group">
@@ -24,7 +24,8 @@
                 <label for="content">Question</label>
                 <textarea class="form-control" id="content" rows="3" name="content" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Ok</button>
+            <a href="/MyForum/" class="btn btn-primary ml-2">Cancel</a>
         </form>
     </div>
 <%--    <c:import url="footer.jsp"/>--%>

@@ -20,11 +20,20 @@
             </span>
         </form>
        <span class="pl-5">
-            <a href="/MyForum/registration" class="btn btn-secondary my-2 my-lg-0">Sign up</a>
+            <a href="/MyForum/registration" class="btn btn-secondary my-2 my-lg-0">Sign Up</a>
         </span>
-        <span class="px-3">
-            <a href="/MyForum/login" class="btn btn-secondary my-2 my-lg-0">Sign in</a>
-        </span>
+        <c:choose>
+            <c:when test="${role.name() == 'GUEST'}">
+                <span class="px-3">
+                <a href="/MyForum/login" class="btn btn-secondary my-2 my-lg-0">Sign In</a>
+                </span>
+            </c:when>
+            <c:otherwise>
+                <span class="px-3">
+                    <a href="/MyForum/login" class="btn btn-secondary my-2 my-lg-0">Log Out</a>
+                </span>
+            </c:otherwise>
+        </c:choose>
     </div>
 </nav>
 </body>

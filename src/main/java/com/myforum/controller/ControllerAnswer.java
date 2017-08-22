@@ -1,12 +1,15 @@
 package com.myforum.controller;
 
+import com.myforum.constants.Role;
 import com.myforum.database.Answer;
 import com.myforum.database.Question;
 import com.myforum.service.AnswerService;
 import com.myforum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -26,21 +29,21 @@ public class ControllerAnswer extends BaseController {
     private QuestionService questionService;
 
     @GetMapping("/**/question/{questinId:[0-9]+}")
-    public ModelAndView showAnswers(@PathVariable int questinId) {
+    public String showAnswers(@PathVariable int questinId, ModelMap modelMap) {
         Question question = questionService.getQuestionByID(questinId);
         List<Answer> list = answerService.getAnswers(question);
-        Map<String, Object> map = new HashMap<>();
-        map.put("question", question);
-        map.put("answers", list);
-        return new ModelAndView("addionAnswerOnQuestion", map);
+        modelMap.addAttribute("question", question);
+        modelMap.addAttribute("answers", list);
+        System.out.println((Role)modelMap.get("role"));
+        return "addionAnswerOnQuestion";
     }
 
     @PostMapping("/**/question/{questinId:[0-9]+}")
-    public String addComment(@PathVariable int questinId, @RequestParam("answer") String answer) {
+    public String addComment(@PathVariable int questinId, @RequestParam("answer") String answer, ModelMap modelMap) {
         Answer myAnswer = new Answer();
         myAnswer.setComment(answer);
         myAnswer.setQuestion(questionService.getQuestionByID(questinId));
         answerService.addAnswer(myAnswer);
-        return "redirect:/MyForum/question/"+questinId;
+        return showAnswers(questinId, modelMap);
     }
 }

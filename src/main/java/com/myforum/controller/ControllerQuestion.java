@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,11 @@ public class ControllerQuestion extends BaseController {
             list = questionService.searchByTitle(search);
         }
         modelMap.addAttribute("listTitle", list);
+        Role role = (Role) modelMap.get("role");
+        System.out.println(role.name());
+        if (Role.GUEST != role) {
+            //modelMap.addAttribute("", "");
+        }
         return "main";
     }
 
