@@ -19,6 +19,7 @@ import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.net.CookieHandler;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +56,8 @@ public class ControllerQuestion extends BaseController {
         Question question = new Question();
         question.setTitle(title);
         question.setContent(content);
+        Role role = (Role) modelMap.get("role");
+        System.out.println(role.name()+"DDDDD");
         if (questionService.addQuestion(question)) return main(null, modelMap);
         else {
             modelMap.addAttribute("flag", true);
@@ -64,7 +67,9 @@ public class ControllerQuestion extends BaseController {
     }
 
     @GetMapping(value = "/**/NewQuestion")
-    public String openAddionQuestion() {
+    public String openAddionQuestion(ModelMap modelMap) {
+        Role role = (Role) modelMap.get("role");
+        System.out.println(role.name());
         return "addionQuestion";
     }
 
