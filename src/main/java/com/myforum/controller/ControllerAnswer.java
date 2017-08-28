@@ -34,7 +34,7 @@ public class ControllerAnswer extends BaseController {
         List<Answer> list = answerService.getAnswers(question);
         modelMap.addAttribute("question", question);
         modelMap.addAttribute("answers", list);
-        System.out.println((Role)modelMap.get("role"));
+/*        System.out.println((Role)modelMap.get("role"));*/
         return "addionAnswerOnQuestion";
     }
 

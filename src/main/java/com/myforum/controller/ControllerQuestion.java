@@ -7,6 +7,7 @@ import com.myforum.database.User;
 import com.myforum.service.AnswerService;
 import com.myforum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.Conventions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,10 +31,17 @@ import java.util.Map;
  * Created by dsvetyshov on 07.03.2017.
  */
 @Controller
-public class ControllerQuestion extends BaseController {
+@SessionAttributes("role")
+public class ControllerQuestion { //extends BaseController {
 
     @Autowired
     private QuestionService questionService;
+
+    @ModelAttribute()
+    public Role getRole() {
+        System.out.println("getRole");
+        return Role.GUEST;
+    }
 
     @GetMapping("/")
     public String main(@RequestParam(value = "search", required = false) String search, ModelMap modelMap)  {
@@ -44,7 +52,7 @@ public class ControllerQuestion extends BaseController {
         }
         modelMap.addAttribute("listTitle", list);
         Role role = (Role) modelMap.get("role");
-        System.out.println(role.name());
+        System.out.println(role.name() + " getMain");
         if (Role.GUEST != role) {
             //modelMap.addAttribute("", "");
         }
@@ -57,7 +65,8 @@ public class ControllerQuestion extends BaseController {
         question.setTitle(title);
         question.setContent(content);
         Role role = (Role) modelMap.get("role");
-        System.out.println(role.name()+"DDDDD");
+        System.out.println(role.name() + " postMain");
+        modelMap.addAttribute("role", Role.ADMIN);
         if (questionService.addQuestion(question)) return main(null, modelMap);
         else {
             modelMap.addAttribute("flag", true);
@@ -68,8 +77,8 @@ public class ControllerQuestion extends BaseController {
 
     @GetMapping(value = "/**/NewQuestion")
     public String openAddionQuestion(ModelMap modelMap) {
-        Role role = (Role) modelMap.get("role");
-        System.out.println(role.name());
+        //System.out.println(role.name() + " add");
+        System.out.println(modelMap.get("role") + " add");
         return "addionQuestion";
     }
 

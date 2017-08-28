@@ -5,16 +5,19 @@ import com.myforum.constants.Role;
 import com.myforum.database.User;
 import com.myforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,8 +25,9 @@ import java.util.Map;
  * Created by Dima on 19.03.2017.
  */
 @Controller
-@SessionAttributes("user")
-public class ControllerUser extends BaseController {
+@SessionAttributes("role")
+//@SessionAttributes("user")
+public class ControllerUser {//extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -31,6 +35,12 @@ public class ControllerUser extends BaseController {
     @GetMapping("/**/registration")
     public ModelAndView openRegistration() {
         return new ModelAndView("registrationUser");
+    }
+
+    @ModelAttribute()
+    public Role getRole() {
+        System.out.println("getRole");
+        return Role.GUEST;
     }
 
     @PostMapping("/**/registration")
@@ -71,16 +81,20 @@ public class ControllerUser extends BaseController {
     }
 
     @GetMapping("/**/login")
-    public String openLogin() {
+    public String openLogin(ModelMap modelMap) {
+        System.out.println(modelMap.get("role") + " : getlogIn");
+        modelMap.addAttribute("role", Role.USER);
         return "login";
     }
 
     @PostMapping("/**/login")
-    public View SignIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
+    public View signIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
         User user = userService.getUser(login, password);
         if (user != null) {
-            modelMap.addAttribute("user", user);
-            modelMap.addAttribute("role", Role.USER);
+            System.out.println(modelMap.get("role") + " : postlogIn");
+            //modelMap.addAttribute("user", user);
+            //modelMap.addAttribute("role", Role.USER);
+            //redirectAttributes.addFlashAttribute("role", Role.USER);
             RedirectView redirectView = new RedirectView("/MyForum/");
             redirectView.setExposeModelAttributes(false);
             return redirectView;
@@ -88,5 +102,16 @@ public class ControllerUser extends BaseController {
         modelMap.addAttribute("flag", true);
         modelMap.addAttribute("error", ErrorMsg.INVALID_SIGN_IN);
         return new ModelAndView("login").getView();
+    }
+
+    @GetMapping("/**/logout")
+    public View logOut(ModelMap modelMap, SessionStatus httpStatus, HttpSession httpSession) {
+        System.out.println(modelMap.get("role") + " : logout");
+        httpStatus.setComplete();
+        System.out.println(modelMap.get("role") + " : logout");
+        System.out.println(httpSession.getAttribute("role") + " : logout");
+        RedirectView redirectView = new RedirectView("/MyForum/");
+        redirectView.setExposeModelAttributes(false);
+        return redirectView;
     }
 }

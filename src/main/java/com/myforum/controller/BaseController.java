@@ -14,11 +14,9 @@ import org.springframework.web.context.request.WebRequest;
 @SessionAttributes("role")
 public class BaseController {
 
-/*    @ModelAttribute()
-    public void getRole(ModelMap modelMap) {
-        if (modelMap.get("role") == null) {
-            modelMap.addAttribute("role", Role.GUEST);
-        }
+    @ModelAttribute()
+    public Role getRole() {
         System.out.println("getRole");
-    }*/
+        return Role.GUEST;
+    }
 }
