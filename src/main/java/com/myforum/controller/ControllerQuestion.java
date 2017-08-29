@@ -32,16 +32,18 @@ import java.util.Map;
  */
 @Controller
 @SessionAttributes("role")
-public class ControllerQuestion { //extends BaseController {
+public class ControllerQuestion extends BaseController {
 
     @Autowired
     private QuestionService questionService;
 
+/*
     @ModelAttribute()
     public Role getRole() {
         System.out.println("getRole");
         return Role.GUEST;
     }
+*/
 
     @GetMapping("/")
     public String main(@RequestParam(value = "search", required = false) String search, ModelMap modelMap)  {

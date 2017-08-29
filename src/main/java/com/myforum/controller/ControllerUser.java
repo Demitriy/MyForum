@@ -27,7 +27,7 @@ import java.util.Map;
 @Controller
 @SessionAttributes("role")
 //@SessionAttributes("user")
-public class ControllerUser {//extends BaseController {
+public class ControllerUser extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -37,11 +37,11 @@ public class ControllerUser {//extends BaseController {
         return new ModelAndView("registrationUser");
     }
 
-    @ModelAttribute()
+/*    @ModelAttribute()
     public Role getRole() {
         System.out.println("getRole");
         return Role.GUEST;
-    }
+    }*/
 
     @PostMapping("/**/registration")
     public ModelAndView addUser(@RequestParam("login") String login, @RequestParam("password") String password , @RequestParam("confirm") String confirm,

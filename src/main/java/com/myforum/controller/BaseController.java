@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 /**
  * Created by Dima on 20.08.2017.
  */
-@SessionAttributes("role")
+//@SessionAttributes("role")
 public class BaseController {
 
     @ModelAttribute()
