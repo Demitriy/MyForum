@@ -82,8 +82,6 @@ public class ControllerUser extends BaseController {
 
     @GetMapping("/**/login")
     public String openLogin(ModelMap modelMap) {
-        System.out.println(modelMap.get("role") + " : getlogIn");
-        modelMap.addAttribute("role", Role.USER);
         return "login";
     }
 
@@ -91,9 +89,8 @@ public class ControllerUser extends BaseController {
     public View signIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
         User user = userService.getUser(login, password);
         if (user != null) {
-            System.out.println(modelMap.get("role") + " : postlogIn");
             //modelMap.addAttribute("user", user);
-            //modelMap.addAttribute("role", Role.USER);
+            modelMap.addAttribute("role", Role.USER);
             //redirectAttributes.addFlashAttribute("role", Role.USER);
             RedirectView redirectView = new RedirectView("/MyForum/");
             redirectView.setExposeModelAttributes(false);
@@ -109,7 +106,7 @@ public class ControllerUser extends BaseController {
         System.out.println(modelMap.get("role") + " : logout");
         httpStatus.setComplete();
         System.out.println(modelMap.get("role") + " : logout");
-        System.out.println(httpSession.getAttribute("role") + " : logout");
+        System.out.println(httpSession.getAttribute("role") + " : logoutHttPSession");
         RedirectView redirectView = new RedirectView("/MyForum/");
         redirectView.setExposeModelAttributes(false);
         return redirectView;

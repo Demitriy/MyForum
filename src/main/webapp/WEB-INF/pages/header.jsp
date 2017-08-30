@@ -23,7 +23,7 @@
             <a href="/MyForum/registration" class="btn btn-secondary my-2 my-lg-0">Sign Up</a>
         </span>
         <c:choose>
-            <c:when test="${role.name() != 'GUEST'}">
+            <c:when test="${role.name() == 'GUEST'}">
                 <span class="px-3">
                 <a href="/MyForum/login" class="btn btn-secondary my-2 my-lg-0">Sign In</a>
                 </span>

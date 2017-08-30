@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
 import java.nio.charset.Charset;
@@ -31,7 +32,7 @@ import java.util.Map;
  * Created by dsvetyshov on 07.03.2017.
  */
 @Controller
-@SessionAttributes("role")
+//@SessionAttributes("role")
 public class ControllerQuestion extends BaseController {
 
     @Autowired
@@ -46,30 +47,27 @@ public class ControllerQuestion extends BaseController {
 */
 
     @GetMapping("/")
-    public String main(@RequestParam(value = "search", required = false) String search, ModelMap modelMap)  {
+    public String main(@RequestParam(value = "search", required = false) String search, ModelMap modelMap, HttpSession httpSession)  {
         List<Question> list;
         if (search == null || search.trim().equals("")) list = questionService.getAllQuestions();
         else {
             list = questionService.searchByTitle(search);
         }
         modelMap.addAttribute("listTitle", list);
-        Role role = (Role) modelMap.get("role");
-        System.out.println(role.name() + " getMain");
-        if (Role.GUEST != role) {
+/*        if (Role.GUEST != role) {
             //modelMap.addAttribute("", "");
-        }
+        }*/
+        System.out.println(modelMap.get("role") + " : main");
+        System.out.println(httpSession.getAttribute("role") + " : mainHttPSession");
         return "main";
     }
 
     @PostMapping("/")
-    public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content, ModelMap modelMap) {
+    public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content, ModelMap modelMap, HttpSession httpSession) {
         Question question = new Question();
         question.setTitle(title);
         question.setContent(content);
-        Role role = (Role) modelMap.get("role");
-        System.out.println(role.name() + " postMain");
-        modelMap.addAttribute("role", Role.ADMIN);
-        if (questionService.addQuestion(question)) return main(null, modelMap);
+        if (questionService.addQuestion(question)) return main(null, modelMap, httpSession);
         else {
             modelMap.addAttribute("flag", true);
             modelMap.addAttribute("value", title);
@@ -79,8 +77,6 @@ public class ControllerQuestion extends BaseController {
 
     @GetMapping(value = "/**/NewQuestion")
     public String openAddionQuestion(ModelMap modelMap) {
-        //System.out.println(role.name() + " add");
-        System.out.println(modelMap.get("role") + " add");
         return "addionQuestion";
     }
 
