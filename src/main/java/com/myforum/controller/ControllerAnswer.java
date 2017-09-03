@@ -3,6 +3,7 @@ package com.myforum.controller;
 import com.myforum.constants.Role;
 import com.myforum.database.Answer;
 import com.myforum.database.Question;
+import com.myforum.database.User;
 import com.myforum.service.AnswerService;
 import com.myforum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,17 +33,21 @@ public class ControllerAnswer extends BaseController {
     private QuestionService questionService;
 
     @GetMapping("/**/question/{questinId:[0-9]+}")
-    public String showAnswers(@PathVariable int questinId, ModelMap modelMap) {
+    public ModelAndView showAnswers(@PathVariable int questinId, ModelMap modelMap) {
         Question question = questionService.getQuestionByID(questinId);
         List<Answer> list = answerService.getAnswers(question);
         modelMap.addAttribute("question", question);
         modelMap.addAttribute("answers", list);
-/*        System.out.println((Role)modelMap.get("role"));*/
-        return "addionAnswerOnQuestion";
+        return new ModelAndView("addionAnswerOnQuestion", modelMap);
     }
 
     @PostMapping("/**/question/{questinId:[0-9]+}")
-    public String addComment(@PathVariable int questinId, @RequestParam("answer") String answer, ModelMap modelMap) {
+    public ModelAndView addComment(@PathVariable int questinId, @RequestParam("answer") String answer, ModelMap modelMap) {
+        if (modelMap.get("role") == Role.GUEST) {
+            RedirectView redirectView = new RedirectView("/MyForum/login");
+            redirectView.setExposeModelAttributes(false);
+            return new ModelAndView(redirectView);
+        }
         Answer myAnswer = new Answer();
         myAnswer.setComment(answer);
         myAnswer.setQuestion(questionService.getQuestionByID(questinId));

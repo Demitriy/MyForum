@@ -25,9 +25,8 @@ import java.util.Map;
  * Created by Dima on 19.03.2017.
  */
 @Controller
-@SessionAttributes("role")
-//@SessionAttributes("user")
-public class ControllerUser extends BaseController {
+@SessionAttributes({"role", "user"})
+class ControllerUser extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -36,12 +35,6 @@ public class ControllerUser extends BaseController {
     public ModelAndView openRegistration() {
         return new ModelAndView("registrationUser");
     }
-
-/*    @ModelAttribute()
-    public Role getRole() {
-        System.out.println("getRole");
-        return Role.GUEST;
-    }*/
 
     @PostMapping("/**/registration")
     public ModelAndView addUser(@RequestParam("login") String login, @RequestParam("password") String password , @RequestParam("confirm") String confirm,
@@ -81,32 +74,28 @@ public class ControllerUser extends BaseController {
     }
 
     @GetMapping("/**/login")
-    public String openLogin(ModelMap modelMap) {
+    public String openLogin() {
         return "login";
     }
 
     @PostMapping("/**/login")
-    public View signIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
+    public ModelAndView signIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
         User user = userService.getUser(login, password);
         if (user != null) {
-            //modelMap.addAttribute("user", user);
+            modelMap.addAttribute("user", user);
             modelMap.addAttribute("role", Role.USER);
-            //redirectAttributes.addFlashAttribute("role", Role.USER);
             RedirectView redirectView = new RedirectView("/MyForum/");
             redirectView.setExposeModelAttributes(false);
-            return redirectView;
+            return new ModelAndView(redirectView);
         }
         modelMap.addAttribute("flag", true);
         modelMap.addAttribute("error", ErrorMsg.INVALID_SIGN_IN);
-        return new ModelAndView("login").getView();
+        return new ModelAndView("login", modelMap);
     }
 
     @GetMapping("/**/logout")
-    public View logOut(ModelMap modelMap, SessionStatus httpStatus, HttpSession httpSession) {
-        System.out.println(modelMap.get("role") + " : logout");
+    public View logOut(SessionStatus httpStatus) {
         httpStatus.setComplete();
-        System.out.println(modelMap.get("role") + " : logout");
-        System.out.println(httpSession.getAttribute("role") + " : logoutHttPSession");
         RedirectView redirectView = new RedirectView("/MyForum/");
         redirectView.setExposeModelAttributes(false);
         return redirectView;

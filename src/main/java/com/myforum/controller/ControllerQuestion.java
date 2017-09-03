@@ -14,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
@@ -32,42 +34,28 @@ import java.util.Map;
  * Created by dsvetyshov on 07.03.2017.
  */
 @Controller
-//@SessionAttributes("role")
 public class ControllerQuestion extends BaseController {
 
     @Autowired
     private QuestionService questionService;
 
-/*
-    @ModelAttribute()
-    public Role getRole() {
-        System.out.println("getRole");
-        return Role.GUEST;
-    }
-*/
-
     @GetMapping("/")
-    public String main(@RequestParam(value = "search", required = false) String search, ModelMap modelMap, HttpSession httpSession)  {
+    public String main(@RequestParam(value = "search", required = false) String search, ModelMap modelMap)  {
         List<Question> list;
         if (search == null || search.trim().equals("")) list = questionService.getAllQuestions();
         else {
             list = questionService.searchByTitle(search);
         }
         modelMap.addAttribute("listTitle", list);
-/*        if (Role.GUEST != role) {
-            //modelMap.addAttribute("", "");
-        }*/
-        System.out.println(modelMap.get("role") + " : main");
-        System.out.println(httpSession.getAttribute("role") + " : mainHttPSession");
         return "main";
     }
 
     @PostMapping("/")
-    public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content, ModelMap modelMap, HttpSession httpSession) {
+    public String addQuestion(@RequestParam("title") String title, @RequestParam("content") String content, ModelMap modelMap) {
         Question question = new Question();
         question.setTitle(title);
         question.setContent(content);
-        if (questionService.addQuestion(question)) return main(null, modelMap, httpSession);
+        if (questionService.addQuestion(question)) return main(null, modelMap);
         else {
             modelMap.addAttribute("flag", true);
             modelMap.addAttribute("value", title);
@@ -76,8 +64,16 @@ public class ControllerQuestion extends BaseController {
     }
 
     @GetMapping(value = "/**/NewQuestion")
-    public String openAddionQuestion(ModelMap modelMap) {
-        return "addionQuestion";
+    public ModelAndView openAddionQuestion(@ModelAttribute("role") Role role) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (role == Role.GUEST) {
+            RedirectView redirectView = new RedirectView("/MyForum/login");
+            redirectView.setExposeModelAttributes(false);
+            modelAndView.setView(redirectView);
+        } else {
+            modelAndView.setViewName("addionQuestion");
+        }
+        return modelAndView;
     }
 
 }
