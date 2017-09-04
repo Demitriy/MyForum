@@ -7,14 +7,15 @@ public class Answer {
 
     private int id;
     private Question question;
+    private User user;
     private String comment;
 
-    public Answer() {
-    }
+    public Answer() {}
 
-    public Answer(Question question, String comment) {
+    public Answer(Question question, User user, String comment) {
         this.question = question;
         this.comment = comment;
+        this.user = user;
     }
 
     public int getId() {
@@ -39,5 +40,13 @@ public class Answer {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -23,16 +23,19 @@ public class AnswerMySQLDAO implements AnswerDAO {
 
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private UserDAO userDAO;
 
     public boolean addAnswer(Answer answer) {
         if (dataSource != null) {
             Connection connection = null;
             try {
                 connection = dataSource.getConnection();
-                String sql = "INSERT INTO Answers (id_question, comment) VALUE (?, ?)";
+                String sql = "INSERT INTO Answers (id_question, id_user, comment) VALUE (?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, answer.getQuestion().getId());
-                preparedStatement.setNString(2, answer.getComment());
+                preparedStatement.setInt(2, answer.getUser().getId());
+                preparedStatement.setNString(3, answer.getComment());
                 preparedStatement.executeUpdate();
                 return true;
             } catch (Exception e) {
@@ -66,6 +69,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
                 while (resultSet.next()) {
                     Answer answer = new Answer();
                     answer.setId(resultSet.getInt("id"));
+                    answer.setUser(userDAO.getUserByID(resultSet.getInt("id")));
                     answer.setComment(resultSet.getNString("comment"));
                     answer.setQuestion(question);
                     result.add(answer);

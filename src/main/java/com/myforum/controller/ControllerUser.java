@@ -5,19 +5,14 @@ import com.myforum.constants.Role;
 import com.myforum.database.User;
 import com.myforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +20,6 @@ import java.util.Map;
  * Created by Dima on 19.03.2017.
  */
 @Controller
-@SessionAttributes({"role", "user"})
 class ControllerUser extends BaseController {
 
     @Autowired
@@ -80,9 +74,9 @@ class ControllerUser extends BaseController {
 
     @PostMapping("/**/login")
     public ModelAndView signIn(@RequestParam("login") String login, @RequestParam("password") String password, ModelMap modelMap) {
-        User user = userService.getUser(login, password);
+        User user = userService.getAuthUser(login, password);
         if (user != null) {
-            modelMap.addAttribute("user", user);
+            modelMap.addAttribute("authUser", user);
             modelMap.addAttribute("role", Role.USER);
             RedirectView redirectView = new RedirectView("/MyForum/");
             redirectView.setExposeModelAttributes(false);

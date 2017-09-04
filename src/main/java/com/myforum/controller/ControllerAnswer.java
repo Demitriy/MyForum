@@ -51,6 +51,7 @@ public class ControllerAnswer extends BaseController {
         Answer myAnswer = new Answer();
         myAnswer.setComment(answer);
         myAnswer.setQuestion(questionService.getQuestionByID(questinId));
+        myAnswer.setUser((User) modelMap.get("authUser"));
         answerService.addAnswer(myAnswer);
         return showAnswers(questinId, modelMap);
     }

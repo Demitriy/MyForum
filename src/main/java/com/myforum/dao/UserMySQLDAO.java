@@ -85,7 +85,7 @@ public class UserMySQLDAO implements UserDAO {
             Connection connection = null;
             try {
                 connection = dataSource.getConnection();
-                String sql = "SELECT * from Users WHERE id=" + id;
+                String sql = String.format("SELECT * from Users WHERE id='%d'", id);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql);
                 if (resultSet.next()) {

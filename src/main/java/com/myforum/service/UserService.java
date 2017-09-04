@@ -11,5 +11,5 @@ public interface UserService {
 
     boolean existLoginOrEmail(String value);
 
-    User getUser(String login, String password);
+    User getAuthUser(String login, String password);
 }
