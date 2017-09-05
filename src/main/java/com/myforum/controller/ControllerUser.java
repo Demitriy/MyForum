@@ -29,7 +29,7 @@ class ControllerUser extends BaseController {
     public ModelAndView openRegistration() {
         return new ModelAndView("registrationUser");
     }
-
+    //TODO вынести в слой логики
     @PostMapping("/**/registration")
     public ModelAndView addUser(@RequestParam("login") String login, @RequestParam("password") String password , @RequestParam("confirm") String confirm,
                                 @RequestParam("email") String email, @RequestParam(value = "name", required = false) String name) {

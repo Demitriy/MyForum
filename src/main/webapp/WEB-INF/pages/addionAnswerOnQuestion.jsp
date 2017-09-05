@@ -14,10 +14,15 @@
         </div>
         <div class="card-block mt-3">
             <h4 class="card-title">Answers</h4>
-            <hr>
+            <div class="pt-3"></div>
+            <%--<hr>--%>
             <c:forEach var="answer" items="${answers}">
-                <div class="card-text mt-3">${answer.getComment()}</div>
-                <hr>
+                <div class="mt-0">
+                    <div class="card-text mt-0">${answer.getComment()}</div>
+                    <hr id ="hr">
+                    <small class="form-control-feedback">${answer.getUser().getLogin()}</small>
+                    <%--<label for="hr">${answer.getUser().getLogin()}</label>--%>
+                </div>
             </c:forEach>
         </div>
         <form action="" method="post">

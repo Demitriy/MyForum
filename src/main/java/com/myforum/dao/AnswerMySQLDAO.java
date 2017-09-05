@@ -69,7 +69,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
                 while (resultSet.next()) {
                     Answer answer = new Answer();
                     answer.setId(resultSet.getInt("id"));
-                    answer.setUser(userDAO.getUserByID(resultSet.getInt("id")));
+                    answer.setUser(userDAO.getUserByID(resultSet.getInt("id_user")));
                     answer.setComment(resultSet.getNString("comment"));
                     answer.setQuestion(question);
                     result.add(answer);
