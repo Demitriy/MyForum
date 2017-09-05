@@ -30,6 +30,9 @@
             </c:when>
             <c:otherwise>
                 <span class="px-3">
+                    <a href="#" class="btn btn-secondary my-2 my-lg-0">${authUser.getEmail()}</a>
+                </span>
+                <span class="px-3">
                     <a href="/MyForum/logout" class="btn btn-secondary my-2 my-lg-0">Log Out</a>
                 </span>
             </c:otherwise>

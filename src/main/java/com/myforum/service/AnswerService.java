@@ -14,6 +14,4 @@ public interface AnswerService {
 
     List<Answer> getAnswers(Question question);
 
-
-
 }

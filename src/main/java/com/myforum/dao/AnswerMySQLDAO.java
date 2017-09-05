@@ -55,7 +55,7 @@ public class AnswerMySQLDAO implements AnswerDAO {
         return false;
     }
 
-    public List<Answer> getAnswersByQuestion(Question question) {
+    public List<Answer> getAnswers(Question question) {
         if (dataSource != null) {
             Connection connection = null;
             List<Answer> result = new ArrayList<Answer>();

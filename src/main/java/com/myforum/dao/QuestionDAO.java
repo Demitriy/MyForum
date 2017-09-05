@@ -16,4 +16,5 @@ public interface QuestionDAO {
     Question getQuestionByID(Integer id);
 
     List<Question> getQuestionsByTitle(String title);
+
 }

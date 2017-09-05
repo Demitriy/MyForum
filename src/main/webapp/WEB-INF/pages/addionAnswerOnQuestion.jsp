@@ -19,8 +19,8 @@
             <c:forEach var="answer" items="${answers}">
                 <div class="mt-0">
                     <div class="card-text mt-0">${answer.getComment()}</div>
-                    <hr id ="hr">
-                    <small class="form-control-feedback">${answer.getUser().getLogin()}</small>
+                    <hr class="my-lg-0">
+                    <small class="form-control-feedback">Sent by ${answer.getUser().getLogin()}</small>
                     <%--<label for="hr">${answer.getUser().getLogin()}</label>--%>
                 </div>
             </c:forEach>

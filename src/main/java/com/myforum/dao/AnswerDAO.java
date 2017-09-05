@@ -13,6 +13,6 @@ public interface AnswerDAO {
 
     boolean addAnswer(Answer answer);
 
-    List<Answer> getAnswersByQuestion(Question question);
+    List<Answer> getAnswers(Question question);
 
 }

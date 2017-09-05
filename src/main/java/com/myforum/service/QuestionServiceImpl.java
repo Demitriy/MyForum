@@ -32,4 +32,5 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> searchByTitle(String title) {
         return questionDAO.getQuestionsByTitle(title);
     }
+
 }
