@@ -12,6 +12,7 @@
 
     <mvc:annotation-driven/>
 
+
 <!--    <mvc:default-servlet-handler/> стадартный обработчик hadlemapper-->
 
     <mvc:resources mapping="/resources/**" location="/resources/" />

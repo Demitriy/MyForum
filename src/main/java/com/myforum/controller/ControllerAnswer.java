@@ -7,6 +7,7 @@ import com.myforum.database.User;
 import com.myforum.service.AnswerService;
 import com.myforum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,14 @@ public class ControllerAnswer extends BaseController {
         modelMap.addAttribute("answers", list);
         return new ModelAndView("addionAnswerOnQuestion", modelMap);
     }
+
+/*    @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public User showAnswers2() {
+        User user = new User();
+        user.setName("djf");
+        return user;
+    }*/
 
     @PostMapping("/**/question/{questinId:[0-9]+}")
     public ModelAndView addComment(@PathVariable int questinId, @RequestParam("answer") String answer, ModelMap modelMap) {
