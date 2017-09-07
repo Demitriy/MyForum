@@ -14,7 +14,8 @@ import org.springframework.web.context.request.WebRequest;
 @SessionAttributes({"role", "authUser"})
 public class BaseController {
 
-    @ModelAttribute("role")
+    //@ModelAttribute("role")
+    @ModelAttribute
     public Role getRole() {
         return Role.GUEST;
     }
