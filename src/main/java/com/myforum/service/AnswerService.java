@@ -13,5 +13,4 @@ public interface AnswerService {
     boolean addAnswer(Answer answer);
 
     List<Answer> getAnswers(Question question);
-
 }

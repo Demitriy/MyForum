@@ -16,5 +16,4 @@ public interface QuestionService {
     Question getQuestionByID(Integer id);
 
     List<Question> searchByTitle(String title);
-
 }

@@ -11,5 +11,4 @@ public interface AdminDAO {
     Admin getAdminByID(Integer id);
 
     Admin getAdminByUser(User user);
-
 }

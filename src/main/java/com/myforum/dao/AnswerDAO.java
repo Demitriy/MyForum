@@ -14,5 +14,4 @@ public interface AnswerDAO {
     boolean addAnswer(Answer answer);
 
     List<Answer> getAnswers(Question question);
-
 }

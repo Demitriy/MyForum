@@ -10,5 +10,4 @@ public interface AdminService {
     boolean isAdmin(Integer id);
 
     boolean isAdmin(User user);
-
 }
