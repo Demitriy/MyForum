@@ -46,6 +46,14 @@ public class QuestionMySQLDAO implements QuestionDAO {
         return false;
     }
 
+    public boolean deleteQuestion(Question question) {
+        return false;
+    }
+
+    public boolean deleteQuestionByID(String id) {
+        return false;
+    }
+
     public List<Question> getAllQuestions() {
         if (dataSource != null) {
             Connection connection = null;

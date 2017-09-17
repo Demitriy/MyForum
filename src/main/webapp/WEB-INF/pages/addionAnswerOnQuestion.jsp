@@ -19,6 +19,11 @@
             <c:forEach var="answer" items="${answers}">
                 <div class="mt-0">
                     <div class="card-text mt-0">${answer.getComment()}</div>
+                    <c:if test="${role.name() == 'ADMIN'}">
+                        <div class="ml-auto">
+                          <button type="submit" class="btn btn-primary">Delete</button>
+                        </div>
+                    </c:if>
                     <hr class="my-lg-0">
                     <small class="form-control-feedback">Sent by ${answer.getUser().getLogin()}</small>
                     <%--<label for="hr">${answer.getUser().getLogin()}</label>--%>

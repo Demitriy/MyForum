@@ -3,8 +3,10 @@ package com.myforum.controller;
 import com.myforum.constants.ErrorMsg;
 import com.myforum.constants.Role;
 import com.myforum.database.User;
+import com.myforum.service.AdminService;
 import com.myforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,8 @@ class ControllerUser extends BaseController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping("/**/registration")
     public ModelAndView openRegistration() {
@@ -77,7 +81,11 @@ class ControllerUser extends BaseController {
         User user = userService.getAuthUser(login, password);
         if (user != null) {
             modelMap.addAttribute("authUser", user);
-            modelMap.addAttribute("role", Role.USER);
+            if (adminService.isAdmin(user)) {
+                modelMap.addAttribute("role", Role.ADMIN);
+            } else {
+                modelMap.addAttribute("role", Role.USER);
+            }
             RedirectView redirectView = new RedirectView("/MyForum/");
             redirectView.setExposeModelAttributes(false);
             return new ModelAndView(redirectView);

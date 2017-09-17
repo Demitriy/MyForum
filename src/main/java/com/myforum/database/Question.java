@@ -30,6 +30,6 @@ public class Question {
     }
 
     public void setContent(String content) {
-        this.content = content.trim();
+        this.content = content;
     }
 }

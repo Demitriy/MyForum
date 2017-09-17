@@ -11,6 +11,10 @@ public interface QuestionDAO {
 
     boolean addQuestion(Question question);
 
+    boolean deleteQuestion(Question question);
+
+    boolean deleteQuestionByID(String id);
+
     List<Question> getAllQuestions();
 
     Question getQuestionByID(Integer id);

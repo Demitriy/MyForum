@@ -91,5 +91,12 @@ public class AnswerMySQLDAO implements AnswerDAO {
         }
         return null;
     }
-    
+
+    public boolean deleteAnswer(Answer answer) {
+        return false;
+    }
+
+    public boolean deleteAnswerByID(String id) {
+        return false;
+    }
 }
